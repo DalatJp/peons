@@ -3,14 +3,15 @@ package proc
 import (
 	"strings"
 	"sync"
-	"syscall"
 	"unicode"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 var (
-	user32                  = syscall.NewLazyDLL("user32.dll")
-	kernel32                = syscall.NewLazyDLL("kernel32.dll")
+	user32                  = windows.NewLazySystemDLL("user32.dll")
+	kernel32                = windows.NewLazySystemDLL("kernel32.dll")
 	procEnumWindows         = user32.NewProc("EnumWindows")
 	procWindowThreadProcess = user32.NewProc("GetWindowThreadProcessId")
 	procIsWindowVisible     = user32.NewProc("IsWindowVisible")
@@ -104,7 +105,7 @@ func ancestorWindow(pid uint32) uintptr {
 
 // windowOf donne une fenêtre de premier niveau visible du processus pid, ou 0.
 func windowOf(pid uint32) (found uintptr) {
-	cb := syscall.NewCallback(func(hwnd, _ uintptr) uintptr {
+	cb := windows.NewCallback(func(hwnd, _ uintptr) uintptr {
 		var owner uint32
 		procWindowThreadProcess.Call(hwnd, uintptr(unsafe.Pointer(&owner)))
 		if owner != pid {
@@ -144,10 +145,10 @@ func raise(hwnd uintptr) {
 
 func className(hwnd uintptr) string { return text(procGetClassName, hwnd) }
 
-func text(proc *syscall.LazyProc, hwnd uintptr) string {
+func text(proc *windows.LazyProc, hwnd uintptr) string {
 	buf := make([]uint16, 256)
 	proc.Call(hwnd, uintptr(unsafe.Pointer(&buf[0])), uintptr(len(buf)))
-	return syscall.UTF16ToString(buf)
+	return windows.UTF16ToString(buf)
 }
 
 // selectTab sélectionne dans la fenêtre hwnd de Windows Terminal l'onglet dont le
