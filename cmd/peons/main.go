@@ -3,6 +3,8 @@
 //	peons             lance l'application et ouvre les réglages
 //	peons run         idem ; options : voir « peons run -h »
 //	peons hook        hook Claude Code (celui du plugin) : lit l'événement sur stdin et le transmet à l'application
+//	peons sessions    sessions à reprendre (fiches écrites par le hook) ; -all : avec les terminées
+//	peons done [id]   termine la fiche d'une session (sans id : la seule ouverte dans le dossier courant)
 //
 // L'exécutable est construit pour le sous-système graphique (voir build.ps1) :
 // un double-clic n'ouvre pas de console. Il ne dépend que des DLL de Windows.
@@ -34,8 +36,12 @@ func main() {
 		runApp()
 	case "hook":
 		runHook()
+	case "sessions":
+		runSessions()
+	case "done":
+		runDone()
 	default:
-		fmt.Fprintf(os.Stderr, "commande inconnue %q (run, hook)\n", cmd)
+		fmt.Fprintf(os.Stderr, "commande inconnue %q (run, hook, sessions, done)\n", cmd)
 		os.Exit(2)
 	}
 }

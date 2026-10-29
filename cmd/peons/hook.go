@@ -8,6 +8,7 @@ import (
 
 	"peons/internal/ipc"
 	"peons/internal/proc"
+	"peons/internal/resume"
 	"peons/internal/session"
 )
 
@@ -46,6 +47,13 @@ func runHook() {
 	if capturesProcess[in.Name] {
 		if pid, started, ok := proc.FindClaude(); ok {
 			ev.PID, ev.Started = pid, started
+		}
+	}
+	// la fiche de reprise est écrite ici, pas par l'application : elle doit exister
+	// même si l'application ne tourne pas, et survivre à un plantage
+	if in.Name == "SessionStart" {
+		if err := resume.Start(resume.Entry{ID: in.Session, Cwd: in.Cwd, Transcript: in.Journal, PID: ev.PID, Started: ev.Started}); err != nil {
+			logf("hook : fiche de reprise : %v", err)
 		}
 	}
 	if ipc.Send(ev) == nil || in.Name == "SessionEnd" {
