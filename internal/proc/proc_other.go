@@ -61,4 +61,4 @@ func ps(pid uint32) (ppid uint32, comm string, ok bool) {
 }
 
 // Focus : pas de prise en charge hors Windows.
-func Focus(pid uint32) bool { return false }
+func Focus(pid uint32, title string) bool { return false }

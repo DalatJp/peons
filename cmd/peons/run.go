@@ -891,7 +891,7 @@ func (a *app) click(x, y float32, right bool) {
 	if !right {
 		a.selected = id
 		if pid := v.sess.PID; pid != 0 { // met son terminal au premier plan, pour la retrouver
-			go proc.Focus(pid)
+			go proc.Focus(pid, v.sess.Title())
 		}
 	}
 	if !opt.demo {
