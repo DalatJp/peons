@@ -236,6 +236,9 @@ func runApp() {
 		}
 		return
 	}
+	if legacyHook() != "" {
+		showNotice(legacyHookNotice)
+	}
 	if !opt.trace {
 		freeConsole()
 	}

@@ -1,39 +1,38 @@
 {
   "hooks": {
-    "UserPromptSubmit": [
+    "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "${CLAUDE_PLUGIN_ROOT}/bin/fetch.cmd"
+            ],
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "command": "cmd.exe",
+            "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
         ]
       }
     ],
-    "SessionStart": [
+    "UserPromptSubmit": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "curl.exe",
+            "command": "cmd.exe",
             "args": [
-              "-fsSL",
-              "--create-dirs",
-              "-z",
-              "${CLAUDE_PLUGIN_DATA}/peons.exe",
-              "-o",
-              "${CLAUDE_PLUGIN_DATA}/peons.exe",
-              "https://github.com/aero-md/peons/releases/latest/download/peons.exe"
-            ],
-            "timeout": 60
-          },
-          {
-            "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
-            "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -46,8 +45,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -60,8 +61,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -74,8 +77,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -88,21 +93,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
-              "hook"
-            ]
-          }
-        ]
-      }
-    ],
-    "StopFailure": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
-            "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -115,8 +109,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -129,8 +125,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -141,8 +139,25 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd.exe",
+            "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -154,8 +169,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -167,8 +184,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
@@ -180,8 +199,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "command": "cmd.exe",
             "args": [
+              "/c",
+              "%LOCALAPPDATA%\\peons\\peons.exe",
               "hook"
             ]
           }
