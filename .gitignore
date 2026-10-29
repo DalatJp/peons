@@ -1,0 +1,9 @@
+# produits du build (build.ps1)
+/peons.exe
+*.exe
+*.dll
+
+# fichiers temporaires
+*.tmp
+*.bak*
+*~

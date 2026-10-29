@@ -1,0 +1,7 @@
+{
+  "left": "island_1_left.png",
+  "right": "island_1_right.png",
+  "centers": ["island_1_center.png", "island_1_center_1.png", "island_1_center_2.png", "island_1_center_3.png", "island_1_center_4.png"],
+  "feet": 9,
+  "guard": 12
+}

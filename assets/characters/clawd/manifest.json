@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "bodies": {
+    "alert": {
+      "period": 350,
+      "frames": [
+        {
+          "image": "body/alert.png",
+          "eyes": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "image": "body/alert_1.png",
+          "eyes": {
+            "x": 16,
+            "y": 14
+          }
+        }
+      ],
+      "fx": [
+        "waiting_sign"
+      ]
+    },
+    "normal": {
+      "period": 600,
+      "frames": [
+        {
+          "image": "body/neutral.png",
+          "eyes": {
+            "x": 16,
+            "y": 8
+          }
+        },
+        {
+          "image": "body/neutral_1.png",
+          "eyes": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ]
+    },
+    "sleeping": {
+      "period": 1200,
+      "frames": [
+        {
+          "image": "body/sleep.png"
+        },
+        {
+          "image": "body/sleep_1.png"
+        }
+      ],
+      "fx": [
+        "sleeping_bubble"
+      ]
+    },
+    "mining": {
+      "period": 300,
+      "frames": [
+        {
+          "image": "body/mining.png",
+          "eyes": { "x": 20, "y": 15, "image": "eyes/mining.png" }
+        },
+        {
+          "image": "body/mining_1.png",
+          "eyes": { "x": 17, "y": 14, "image": "eyes/mining_1.png" }
+        }
+      ],
+      "fx": [
+        "mining_rock",
+        "mining_pickaxe",
+        "mining_arm"
+      ]
+    },
+    "bench": {
+      "frames": [
+        {
+          "image": "body/bench.png",
+          "canvas": { "w": 32, "h": 32, "x": 3, "y": 11 },
+          "eyes": { "x": 23, "y": 15, "image": "eyes/bench.png" }
+        }
+      ],
+      "fx": [
+        "bench_bench",
+        "bench_bar"
+      ]
+    },
+    "compacting": {
+      "period": 500,
+      "frames": [
+        {
+          "image": "body/neutral.png",
+          "eyes": { "x": 16, "y": 8 }
+        },
+        {
+          "image": "body/neutral.png",
+          "eyes": { "x": 16, "y": 7 },
+          "squash": { "rows": 7, "keep_top": 2, "keep_bottom": 5 }
+        }
+      ],
+      "fx": [
+        "compacting_piston"
+      ]
+    }
+  },
+  "eyes": {    "happy": "eyes/happy.png",
+    "neutral": "eyes/neutral.png",
+    "sad": "eyes/sad.png",
+    "sleeping": "eyes/sleeping.png"
+  },
+  "fx": {
+    "sleeping_bubble": {
+      "period": 1200,
+      "frames": [
+        {
+          "image": "sleeping_prop_01.png",
+          "x": 14,
+          "y": 3
+        },
+        {
+          "image": "sleeping_prop_02.png",
+          "x": 14,
+          "y": 1
+        },
+        {
+          "image": "sleeping_prop_03.png",
+          "x": 14,
+          "y": -1
+        }
+      ]
+    },
+    "waiting_sign": {
+      "period": 350,
+      "frames": [
+        {
+          "image": "waiting_prop_01.png",
+          "x": 23,
+          "y": -3
+        },
+        {
+          "image": "waiting_prop_01.png",
+          "x": 23,
+          "y": -4
+        }
+      ]
+    },
+    "mining_rock": {
+      "frames": [
+        { "image": "rock.png", "x": 20, "y": 23, "ms": 12000 },
+        { "image": "rock_crack_1.png", "x": 20, "y": 23, "ms": 12000 },
+        { "image": "rock_crack_2.png", "x": 20, "y": 23, "ms": 12000 },
+        { "image": "rock_crack_3.png", "x": 20, "y": 23, "ms": 12000 },
+        { "image": "rock_crack_4.png", "x": 20, "y": 23, "ms": 12000 },
+        { "image": "rock_burst_1.png", "x": 18, "y": 20, "ms": 50, "hold": true },
+        { "image": "rock_burst_2.png", "x": 16, "y": 17, "ms": 50, "hold": true },
+        { "image": "rock_burst_3.png", "x": 15, "y": 16, "ms": 50, "hold": true },
+        { "image": "rock_burst_4.png", "x": 13, "y": 16, "ms": 50, "hold": true },
+        { "image": "rock_burst_5.png", "x": 17, "y": 17, "ms": 50, "hold": true },
+        { "image": "rock_burst_6.png", "x": 16, "y": 18, "ms": 50, "hold": true },
+        { "image": "rock_burst_7.png", "x": 15, "y": 21, "ms": 50, "hold": true },
+        { "image": "rock_burst_8.png", "x": 14, "y": 25, "ms": 50, "hold": true },
+        { "image": "rock_burst_rest.png", "x": 20, "y": 27, "ms": 250, "hold": true },
+        { "image": "rock_fall_1.png", "x": 22, "y": -12, "ms": 40, "hold": true },
+        { "image": "rock_fall_2.png", "x": 21, "y": -12, "ms": 40, "hold": true },
+        { "image": "rock_fall_3.png", "x": 20, "y": -12, "ms": 40, "hold": true },
+        { "image": "rock_fall_4.png", "x": 20, "y": -12, "ms": 40, "hold": true },
+        { "image": "rock.png", "x": 20, "y": -11, "ms": 40, "hold": true },
+        { "image": "rock.png", "x": 20, "y": -4, "ms": 40, "hold": true },
+        { "image": "rock.png", "x": 20, "y": 4, "ms": 40, "hold": true },
+        { "image": "rock.png", "x": 20, "y": 13, "ms": 40, "hold": true },
+        { "image": "rock_land_1.png", "x": 18, "y": 23, "ms": 70, "hold": true },
+        { "image": "rock_land_2.png", "x": 17, "y": 23, "ms": 90, "hold": true }
+      ]
+    },
+    "mining_pickaxe": {
+      "period": 300,
+      "frames": [
+        {
+          "image": "pickaxe.png",
+          "x": 15,
+          "y": 10
+        },
+        {
+          "image": "pickaxe_1.png",
+          "x": 13,
+          "y": 6
+        }
+      ]
+    },
+    "mining_arm": {
+      "period": 300,
+      "frames": [
+        { "image": "body/mining_arm.png", "x": 9, "y": 17 },
+        { "image": "body/mining_1_arm.png", "x": 7, "y": 15 }
+      ]
+    },
+    "bench_bench": {
+      "frames": [
+        { "image": "bench.png", "x": 2, "y": 27 }
+      ]
+    },
+    "bench_bar": {
+      "period": 500,
+      "frames": [
+        { "image": "bench_bar.png", "x": 15, "y": 7 },
+        { "image": "bench_bar.png", "x": 15, "y": 11 }
+      ]
+    },
+    "compacting_piston": {
+      "period": 500,
+      "frames": [
+        {
+          "image": "piston_1.png",
+          "x": 8,
+          "y": -12
+        },
+        {
+          "image": "piston.png",
+          "x": 8,
+          "y": -19
+        }
+      ]
+    }
+  }
+}

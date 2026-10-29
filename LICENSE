@@ -1,0 +1,82 @@
+peons — Licences et attributions
+===============================
+
+Ce fichier couvre le code, les images, la police et les marques de ce dépôt.
+Les parties n'ont pas toutes la même licence : lire les sections 1 à 4.
+
+
+1. Origine du projet
+--------------------
+
+Ce projet a été inspiré par « Notchi », l'application macOS de sk-ruban :
+https://github.com/sk-ruban/notchi
+
+2. Code — licence MIT
+---------------------
+
+Le code source Go (`cmd/`, `internal/`, `tools/`), les scripts et les manifestes
+sont distribués sous la licence MIT ci-dessous.
+
+    MIT License
+
+    Copyright (c) 2026 sk-ruban (Notchi, projet d'origine)
+    Copyright (c) 2026 Aero (réécriture en Go)
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+
+3. Images
+---------
+
+Sous la même licence MIT (section 2), dessinés par l'auteur, l'ensemble de `assets/`, à
+l'exception des fichiers listés ci-dessous.
+
+PAS sous licence MIT — ces images appartiennent à leurs détenteurs respectifs,
+sont reproduites ici sans autorisation de leur part, et n'ont rien à voir avec
+la licence de ce projet. Les droits de les utiliser, copier ou redistribuer ne
+sont pas accordés par ce dépôt :
+
+  - `assets/fx/pickaxe.png` et `pickaxe_1.png` (la pioche du
+    minage) : inspirés de Minecraft © Mojang AB / Microsoft.
+  - `assets/fx/piston.png` et `piston_1.png` (le piston de
+    l'animation de compactage) : inspirés de Minecraft © Mojang AB / Microsoft.
+
+Ces images sont modifiées par rapport aux originales ; elles n'en restent pas
+moins le fruit de l'œuvre de leurs détenteurs. Si un détenteur de droits en
+demande le retrait, elles seront retirées du dépôt et remplacées.
+
+
+4. Police
+---------
+
+`assets/PxPlus_IBM_EGA_8x14.ttf` : PxPlus IBM EGA 8x14, tirée de « The Ultimate
+Oldschool PC Font Pack » de VileR (https://int10h.org/oldschool-pc-fonts/),
+sous licence Creative Commons Attribution-ShareAlike 4.0 International
+(CC BY-SA 4.0) : https://creativecommons.org/licenses/by-sa/4.0/
+La police est redistribuée sans modification. Cette licence s'applique à la
+police seule, pas au reste du dépôt.
+
+
+5. Marques
+----------
+
+Ce projet est indépendant : il n'est ni affilié à, ni approuvé par Mojang AB,
+Microsoft, Anthropic. « Minecraft » et « Claude » sont des marques
+de leurs détenteurs. « clawd » est le nom de la mascotte de Claude Code ; les
+sprites de ce dépôt en sont une interprétation de l'auteur.
