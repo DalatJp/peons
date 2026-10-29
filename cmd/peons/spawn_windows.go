@@ -43,7 +43,7 @@ func startDetached() error {
 func freeConsole() {}
 
 // useConsole rattache les sorties au terminal qui a lancé l'exécutable (il n'en
-// a pas par défaut, étant graphique), pour « install », « uninstall » et « -trace ».
+// a pas par défaut, étant graphique), pour « -trace ».
 // Sans effet si la sortie est déjà redirigée ou s'il n'y a pas de terminal.
 func useConsole() {
 	if h, err := syscall.GetStdHandle(syscall.STD_OUTPUT_HANDLE); err == nil && h != 0 && h != syscall.InvalidHandle {
