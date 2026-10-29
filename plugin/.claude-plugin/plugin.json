@@ -1,6 +1,5 @@
 {
   "name": "peons",
-  "version": "0.1.0",
   "description": "Un clawd par session Claude Code (Windows). Les hooks sont branchés par le plugin et peons.exe est téléchargé depuis les releases GitHub : ni PowerShell ni « Brancher » à cliquer.",
   "repository": "https://github.com/aero-md/peons",
   "license": "MIT"

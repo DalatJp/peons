@@ -92,18 +92,35 @@ Windows uniquement : l'interface parle directement à Win32, sans bibliothèque 
 
 Ça lance les tests, puis produit `peons.exe` (un seul fichier, sans DLL). **Double-clic** sur `peons.exe`, puis **Brancher** dans la fenêtre de réglages. C'est tout : à partir de là, les sessions Claude Code font apparaître leurs bonhommes toutes seules, et l'application se lance d'elle-même au besoin.
 
-### Ou en plugin Claude Code
+### Ou en plugin Claude Code (mises à jour automatiques)
 
 Sans compiler, sans PowerShell, sans « Brancher » : le plugin branche les hooks et télécharge `peons.exe` depuis les releases GitHub (avec `curl.exe`, fourni par Windows).
 
 ```
-claude plugin marketplace add aero-md/peons
-claude plugin install peons@peons
+claude plugin install peons --marketplace aero-md/peons
 ```
 
-Ne l'utilisez pas en même temps que « Brancher » (chaque événement serait envoyé deux fois) : débranchez d'abord (`peons uninstall`). `peons.exe` est conservé dans le dossier de données du plugin et mis à jour quand une release plus récente existe.
+Ça ajoute la marketplace directement depuis ce dépôt GitHub puis installe le plugin (Claude Code 2.1.292 ou plus ; avant, `claude plugin marketplace add aero-md/peons` puis `claude plugin install peons@peons`). Pour suivre un tag plutôt que la branche par défaut : `aero-md/peons#v1.2.0`.
 
-Un clic sur un bonhomme met au premier plan le terminal de sa session (la fenêtre, pas l'onglet) et le fait clignoter.
+**Mises à jour.** Il y en a deux, indépendantes :
+
+- *Le plugin* (hooks, skills) se met à jour depuis ce dépôt, mais **la mise à jour automatique est désactivée par défaut** pour une marketplace tierce. Activez-la dans `/plugin` → onglet **Marketplaces** → `peons` → **Enable auto-update**, ou dans `~/.claude/settings.json` :
+
+  ```json
+  "extraKnownMarketplaces": {
+    "peons": {
+      "source": { "source": "github", "repo": "aero-md/peons" },
+      "autoUpdate": true
+    }
+  }
+  ```
+
+  Claude Code rafraîchit alors la marketplace peu après le premier message de la session, et la nouvelle version est chargée au lancement suivant (ou tout de suite avec `/reload-plugins`). Le manifeste ne fixe volontairement pas de `version` : chaque commit du dépôt est une nouvelle version. Mise à jour à la main : `claude plugin update peons@peons`.
+- *`peons.exe`* est vérifié à chaque démarrage de session (`curl -z`) : il est remplacé dès qu'une release plus récente existe, sans rien faire.
+
+Ne l'utilisez pas en même temps que « Brancher » (chaque événement serait envoyé deux fois) : débranchez d'abord (`peons uninstall`). `peons.exe` est conservé dans le dossier de données du plugin, qui survit aux mises à jour.
+
+Un clic sur un bonhomme met au premier plan le terminal de sa session (la fenêtre et l'onglet dans Windows Terminal) et le fait clignoter.
 
 Tout le reste (commandes, fonctionnement du hook, architecture, détails d'implémentation) est dans [`docs/technique.md`](docs/technique.md).
 
