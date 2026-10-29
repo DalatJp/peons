@@ -1,0 +1,192 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl.exe",
+            "args": [
+              "-fsSL",
+              "--create-dirs",
+              "-z",
+              "${CLAUDE_PLUGIN_DATA}/peons.exe",
+              "-o",
+              "${CLAUDE_PLUGIN_DATA}/peons.exe",
+              "https://github.com/aero-md/peons/releases/latest/download/peons.exe"
+            ],
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "PermissionDenied": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "manual",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_DATA}/peons.exe",
+            "args": [
+              "hook"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

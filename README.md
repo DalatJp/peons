@@ -92,6 +92,19 @@ Windows uniquement : l'interface parle directement à Win32, sans bibliothèque 
 
 Ça lance les tests, puis produit `peons.exe` (un seul fichier, sans DLL). **Double-clic** sur `peons.exe`, puis **Brancher** dans la fenêtre de réglages. C'est tout : à partir de là, les sessions Claude Code font apparaître leurs bonhommes toutes seules, et l'application se lance d'elle-même au besoin.
 
+### Ou en plugin Claude Code
+
+Sans compiler, sans PowerShell, sans « Brancher » : le plugin branche les hooks et télécharge `peons.exe` depuis les releases GitHub (avec `curl.exe`, fourni par Windows).
+
+```
+claude plugin marketplace add aero-md/peons
+claude plugin install peons@peons
+```
+
+Ne l'utilisez pas en même temps que « Brancher » (chaque événement serait envoyé deux fois) : débranchez d'abord (`peons uninstall`). `peons.exe` est conservé dans le dossier de données du plugin et mis à jour quand une release plus récente existe.
+
+Un clic sur un bonhomme met au premier plan le terminal de sa session (la fenêtre, pas l'onglet) et le fait clignoter.
+
 Tout le reste (commandes, fonctionnement du hook, architecture, détails d'implémentation) est dans [`docs/technique.md`](docs/technique.md).
 
 ## D'où ça vient
