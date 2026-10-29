@@ -7,12 +7,12 @@ func TestSameTitle(t *testing.T) {
 		tab, session string
 		want         bool
 	}{
-		{"✳ notchi", "notchi", true},
-		{"◐ notchi", "Notchi", true},
+		{"✳ peons", "peons", true},
+		{"◐ peons", "Peons", true},
 		{"✳ rag confidentialit", "rag confidentialité", true}, // titre d'onglet tronqué
-		{"✳ mcp next", "notchi", false},
-		{"", "notchi", false},
-		{"✳ notchi", "", false},
+		{"✳ mcp next", "peons", false},
+		{"", "peons", false},
+		{"✳ peons", "", false},
 	} {
 		if got := SameTitle(c.tab, c.session); got != c.want {
 			t.Errorf("SameTitle(%q, %q) = %v, attendu %v", c.tab, c.session, got, c.want)

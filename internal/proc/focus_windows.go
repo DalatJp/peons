@@ -4,7 +4,6 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-	"time"
 	"unicode"
 	"unsafe"
 )
@@ -20,12 +19,10 @@ var (
 	procGetWindowTextLength = user32.NewProc("GetWindowTextLengthW")
 	procGetWindowText       = user32.NewProc("GetWindowTextW")
 	procGetClassName        = user32.NewProc("GetClassNameW")
-	procGetForegroundWindow = user32.NewProc("GetForegroundWindow")
 	procIsIconic            = user32.NewProc("IsIconic")
 	procShowWindow          = user32.NewProc("ShowWindow")
 	procSetForegroundWindow = user32.NewProc("SetForegroundWindow")
 	procFlashWindowEx       = user32.NewProc("FlashWindowEx")
-	procKeybdEvent          = user32.NewProc("keybd_event")
 	procFreeConsole         = kernel32.NewProc("FreeConsole")
 	procAttachConsole       = kernel32.NewProc("AttachConsole")
 	procGetConsoleWindow    = kernel32.NewProc("GetConsoleWindow")
@@ -35,14 +32,9 @@ const (
 	gwOwner       = 4
 	gaRootOwner   = 3
 	swRestore     = 9
-	vkControl     = 0x11
-	vkMenu        = 0x12
-	keyUp         = 2
 	flashAll      = 3 // FLASHW_CAPTION | FLASHW_TRAY
 	focusFlashN   = 3
 	terminalClass = "CASCADIA_HOSTING_WINDOW_CLASS" // Windows Terminal
-	maxTabs       = 9                               // Ctrl+Alt+1 à 9
-	tabSettle     = 150 * time.Millisecond          // le titre de la fenêtre suit l'onglet avec un léger retard
 )
 
 // focusMu : AttachConsole vaut pour tout le processus, deux Focus ne s'y mêlent pas.
@@ -138,9 +130,6 @@ func raise(hwnd uintptr) {
 	if m, _, _ := procIsIconic.Call(hwnd); m != 0 {
 		procShowWindow.Call(hwnd, swRestore)
 	}
-	// une touche Alt factice lève la restriction de Windows sur le vol de focus
-	procKeybdEvent.Call(vkMenu, 0, 0, 0)
-	procKeybdEvent.Call(vkMenu, 0, keyUp, 0)
 	procSetForegroundWindow.Call(hwnd)
 	fi := struct {
 		size    uint32
@@ -155,52 +144,21 @@ func raise(hwnd uintptr) {
 
 func className(hwnd uintptr) string { return text(procGetClassName, hwnd) }
 
-func windowTitle(hwnd uintptr) string { return text(procGetWindowText, hwnd) }
-
 func text(proc *syscall.LazyProc, hwnd uintptr) string {
 	buf := make([]uint16, 256)
 	proc.Call(hwnd, uintptr(unsafe.Pointer(&buf[0])), uintptr(len(buf)))
 	return syscall.UTF16ToString(buf)
 }
 
-// selectTab amène l'onglet de titre title au premier plan dans la fenêtre hwnd de
-// Windows Terminal, déjà au premier plan : le titre de la fenêtre est celui de
-// l'onglet actif, on parcourt donc les onglets avec Ctrl+Alt+1 à 9 (raccourcis par
-// défaut) jusqu'à le retrouver. Sans correspondance, on remet l'onglet d'origine.
+// selectTab sélectionne dans la fenêtre hwnd de Windows Terminal l'onglet dont le
+// nom est celui de la session (UI Automation, voir uia_windows.go). Sans
+// correspondance, la fenêtre reste seule au premier plan.
+//
+// Solution bancale : Windows Terminal ne relie un onglet ni à un PID ni à
+// `WT_SESSION`, donc la seule jonction possible est le titre de l'onglet, qui peut
+// être tronqué, dupliqué ou changé par l'utilisateur. On n'a pas mieux.
 func selectTab(hwnd uintptr, title string) {
-	if SameTitle(windowTitle(hwnd), title) {
-		return
-	}
-	time.Sleep(tabSettle)
-	origin := windowTitle(hwnd)
-	originTab := 0
-	for n := 1; n <= maxTabs; n++ {
-		if fg, _, _ := procGetForegroundWindow.Call(); fg != hwnd {
-			return // le focus a été pris ailleurs : on n'envoie pas de touches à une autre fenêtre
-		}
-		chord(byte('0' + n))
-		time.Sleep(tabSettle)
-		got := windowTitle(hwnd)
-		if SameTitle(got, title) {
-			return
-		}
-		if originTab == 0 && got == origin {
-			originTab = n
-		}
-	}
-	if originTab != 0 {
-		chord(byte('0' + originTab))
-	}
-}
-
-// chord envoie Ctrl+Alt+touche.
-func chord(key byte) {
-	for _, k := range []byte{vkControl, vkMenu, key} {
-		procKeybdEvent.Call(uintptr(k), 0, 0, 0)
-	}
-	for _, k := range []byte{key, vkMenu, vkControl} {
-		procKeybdEvent.Call(uintptr(k), 0, keyUp, 0)
-	}
+	selectTabItem(hwnd, func(tab string) bool { return SameTitle(tab, title) })
 }
 
 // SameTitle dit si le titre d'un onglet (préfixé d'un symbole d'état : ✳, ◐…, et
